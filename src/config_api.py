@@ -18,7 +18,7 @@ to update -> cfg.DEFAULT_READ_ENCODING = 'latin1'
 
 # Importing Dependencies
 
-from src.error_types import (
+from .error_types import (
     ConfigNotFoundError
 )
 
@@ -44,7 +44,8 @@ class ConfigAPI:
     ##################################################
 
     CONFIG_VARS = {
-        "DEFAULT_READ_ENCODING": 'utf-8'
+        "DEFAULT_READ_ENCODING": "utf-8",
+        "PY_EXTENSION": ".py"
     }
 
 
@@ -52,7 +53,7 @@ class ConfigAPI:
     #                    Getters                     #
     ##################################################
 
-    def __getattribute__(self, __name: str) -> Any:
+    def __getattr__(self, __name: str) -> Any:
         try:
             return self.CONFIG_VARS[__name]
         except:
