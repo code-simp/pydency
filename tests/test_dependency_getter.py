@@ -2,10 +2,15 @@
 A pytest based unittests for src/dependency_getter.py
 """
 
-from ..src import dependency_getter
-
 import os
+import sys
 
+# To append the path to pydency folder
+rootdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(rootdir, 'src'))
+
+
+from src.pydency import dependency_getter
 
 dep_getter = dependency_getter.DependencyGetter(os.getcwd())
 
