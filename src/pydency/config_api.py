@@ -18,7 +18,7 @@ to update -> cfg.DEFAULT_READ_ENCODING = 'latin1'
 
 # Importing Dependencies
 
-from .error_types import (
+from pydency.error_types import (
     ConfigNotFoundError
 )
 

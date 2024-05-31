@@ -1,0 +1,9 @@
+# Author: Tarun
+
+import sys
+
+from pydency import main
+
+
+if __name__ == "__main__":
+    sys.exit(main())

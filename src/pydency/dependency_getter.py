@@ -3,11 +3,11 @@ This file has the code to list all the dependencies of your python application
 """
 
 # Importing Dependencies
-from .error_types import (
+from pydency.error_types import (
     FileNotFoundError
 )
 
-from .config_api import (
+from pydency.config_api import (
     get_config_api
 )
 
@@ -110,7 +110,7 @@ class DependencyGetter:
                 break
         return import_results
 
-    def _get_possible_files(self, import_patterns):
+    def _get_possible_files(self, import_patterns, possible_path=None):
         
         """
         given a patterns list, tries to find possible patterns for that combination of patterns
@@ -122,7 +122,9 @@ class DependencyGetter:
             return ''
 
         verified_paths = set()
-        possible_path = self.application_path
+
+        if possible_path is None:
+            possible_path = self.application_path
 
         # CASE 1:
         if len(import_patterns) == 1:
@@ -140,8 +142,8 @@ class DependencyGetter:
                     verified_path = _test_and_return_verified_path(possible_path)
                     if verified_path:
                         verified_paths.add(verified_path)
-                possible_path = current_possible_path
-        
+                    possible_path = current_possible_path
+
         # case 2, 4
         if possible_path:
             verified_path = _test_and_return_verified_path(possible_path + cfg.PY_EXTENSION)
@@ -158,12 +160,13 @@ class DependencyGetter:
         The heavy lifter that does the extraction of modules
         """
         
-        visited_files = {}
+        visited_files = set()
         files_to_visit = [file_name_to_look_for, ]
         
         while files_to_visit:
             file_to_visit = files_to_visit.pop()
             visited_files.add(file_to_visit)
+
             file_lines = self._read_file_contents(file_to_visit)
             
             for line in file_lines:
@@ -174,8 +177,15 @@ class DependencyGetter:
                     for file in possible_files:
                         if file not in visited_files:
                             files_to_visit.append(file)
+
+        visited_files.remove(file_name_to_look_for)
         
         return list(visited_files)
 
     def get_dependency(self, file_name_to_look_for):
-        self._get_dependency(file_name_to_look_for=file_name_to_look_for)
+
+        """
+        This is the wrapper method that needs to be called
+        """
+
+        return self._get_dependency(file_name_to_look_for=file_name_to_look_for)
