@@ -10,8 +10,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
 classifiers = [
-    "Framework :: Pydency",
-    "Development Status :: Beta",
+    "Development Status :: 2 - Pre-Alpha",
     "Environment :: Console",
     "Intended Audience :: Developers",
 ]
