@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydency"
+version = "0.0.1"
+description = "Python dependency lister"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+classifiers = [
+    "Framework :: Pydency",
+    "Development Status :: Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+]
+
+[project.scripts]
+pydency = "pydency:main"
+
+[project.urls]
+homepage = "https://github.com/code-simp/pydency"

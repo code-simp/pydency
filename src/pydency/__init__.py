@@ -61,7 +61,10 @@ def main():
     """
 
     # if file_name arg is missing
-    if len(sys.argv) != 1:
+    if len(sys.argv) < 2:
+        print()
+        print("ERROR: Missing file_name argument")
+        print()
         usage()
 
     # required variables
